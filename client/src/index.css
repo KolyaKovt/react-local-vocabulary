@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.mainTitle {
+  @apply text-4xl font-bold;
+}
+.itemsList {
+  @apply flex flex-col gap-6 pb-6;
+}
+.btnContainer {
+  @apply flex gap-2 flex-wrap;
+}
+.wordPairs {
+  @apply flex gap-4 mb-4;
+}
+.word {
+  @apply p-2 text-lg border border-[#a6adbb] rounded;
+}
+.wrong {
+  @apply text-red-400 border-red-400;
+}
+.guessed {
+  @apply text-transparent border-transparent;
+}
+.selected {
+  @apply text-blue-300 border-blue-300;
+}
+.wordsColumn {
+  @apply flex flex-col gap-2
+}
