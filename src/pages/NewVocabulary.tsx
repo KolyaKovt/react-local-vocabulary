@@ -1,16 +1,16 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 
 import { VocabularyForm } from "../components/VocabularyForm"
-import { createVocabularyThunk } from "../redux/vocabularies/operations"
 import { useAppDispatch } from "../redux/hooks"
 import { Container } from "../components/Container"
+import { addVocabulary } from "../redux/vocabularies/slice"
 
 export default function NewVocabulary() {
   const dispatch = useAppDispatch()
   const { register, handleSubmit, reset } = useForm()
 
   const submit: SubmitHandler<FieldValues> = data => {
-    dispatch(createVocabularyThunk(data.name.trim()))
+    dispatch(addVocabulary(data.name.trim()))
     reset()
   }
 

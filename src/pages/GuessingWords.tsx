@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { selectVocabulary } from "../redux/vocabularies/slice"
-import { Vocabulary } from "../types/Vocabulary"
-import { exerciseThunk } from "../redux/vocabularies/operations"
 import { Container } from "../components/Container"
 import { Header } from "../components/Header"
+import { getVocabulary } from "../helpers/getVocabulary"
+import { exercise, selectVocabularies } from "../redux/vocabularies/slice"
 
 const countOfStrins = 6
 let indecies: number[] = []
@@ -15,7 +14,11 @@ let correctInd = -1
 const GuessingWords = () => {
   const dispatch = useAppDispatch()
 
-  const vocabulary = useAppSelector(selectVocabulary) as Vocabulary
+  const { id } = useParams()
+  const vocabulary = getVocabulary(
+    useAppSelector(selectVocabularies),
+    id as string
+  )
 
   const [buttonsInds, setButtonsInds] = useState<number[]>([])
   const [wrongInds, setWrongInds] = useState<number[]>([])
@@ -74,7 +77,7 @@ const GuessingWords = () => {
     if (vocabulary.firstLang.length - countOfGuessedWords === 0) {
       setButtonsInds([])
       correctInd = -1
-      dispatch(exerciseThunk(vocabulary.id))
+      dispatch(exercise(vocabulary.id))
       restart()
     }
   }

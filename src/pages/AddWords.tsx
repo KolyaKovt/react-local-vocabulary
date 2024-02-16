@@ -1,19 +1,24 @@
 import { WordForm } from "../components/WordForm"
-import { selectVocabulary } from "../redux/vocabularies/slice"
-import { addWordThunk } from "../redux/vocabularies/operations"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { Vocabulary } from "../types/Vocabulary"
 import { Container } from "../components/Container"
+import { addWord, selectVocabularies } from "../redux/vocabularies/slice"
+import { getVocabulary } from "../helpers/getVocabulary"
+import { useParams } from "react-router-dom"
 
 export default function AddWords() {
-  const vocabulary = useAppSelector(selectVocabulary) as Vocabulary
+  const { id } = useParams()
+  const vocabulary = getVocabulary(
+    useAppSelector(selectVocabularies),
+    id as string
+  )
   const dispatch = useAppDispatch()
+
   const { register, handleSubmit, reset } = useForm()
 
   const submit: SubmitHandler<FieldValues> = data => {
     const { word, translation } = data
-    dispatch(addWordThunk({ id: vocabulary.id, word, translation }))
+    dispatch(addWord({ vocabularyId: vocabulary.id, word, translation }))
     reset()
   }
 

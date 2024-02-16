@@ -1,24 +1,29 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { WordForm } from "../components/WordForm"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { selectVocabulary } from "../redux/vocabularies/slice"
-import { changeWordThunk } from "../redux/vocabularies/operations"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { Vocabulary } from "../types/Vocabulary"
 import { Container } from "../components/Container"
+import { changeWord, selectVocabularies } from "../redux/vocabularies/slice"
+import { getVocabulary } from "../helpers/getVocabulary"
 
 const ChangeWords = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const vocabulary = useAppSelector(selectVocabulary) as Vocabulary
-  const { wordId } = useParams()
+
+  const { id, wordId } = useParams()
+  const vocabulary = getVocabulary(
+    useAppSelector(selectVocabularies),
+    id as string
+  )
+
   const { handleSubmit, register, reset } = useForm()
 
   const submit: SubmitHandler<FieldValues> = async data => {
-    if (vocabulary.id && wordId) {
-      await dispatch(
-        changeWordThunk({
-          id: wordId,
+    if (id && wordId) {
+      dispatch(
+        changeWord({
+          vocabularyId: id,
+          wordId: wordId,
           word: data.word,
           translation: data.translation,
         })
@@ -26,13 +31,15 @@ const ChangeWords = () => {
     }
 
     reset()
-    navigate(`/${vocabulary.id}`)
+    navigate(`/${id}`)
   }
 
   return (
     <Container>
       <main>
-        <h1 className="mainTitle mt-6 mb-6">Changing words in: {vocabulary.name}</h1>
+        <h1 className="mainTitle mt-6 mb-6">
+          Changing words in: {vocabulary.name}
+        </h1>
         <WordForm
           submit={handleSubmit(submit)}
           register={register}

@@ -1,10 +1,10 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 
 import { VocabularyForm } from "../components/VocabularyForm"
-import { renameVocabularyThunk } from "../redux/vocabularies/operations"
 import { useNavigate, useParams } from "react-router-dom"
 import { useAppDispatch } from "../redux/hooks"
 import { Container } from "../components/Container"
+import { renameVocabulary } from "../redux/vocabularies/slice"
 
 export default function RenameVocabulary() {
   const dispatch = useAppDispatch()
@@ -14,8 +14,8 @@ export default function RenameVocabulary() {
 
   const submit: SubmitHandler<FieldValues> = async data => {
     if (id) {
-      await dispatch(
-        renameVocabularyThunk({
+      dispatch(
+        renameVocabulary({
           name: data.name.trim(),
           id,
         })

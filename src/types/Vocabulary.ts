@@ -1,8 +1,8 @@
 export interface Vocabulary {
-  id: number
+  id: string
   name: string
   firstLang: string[]
   secLang: string[]
-  wordsIds: number[]
+  wordsIds: string[]
   exercise: number
 }

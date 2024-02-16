@@ -1,14 +1,19 @@
-import { Link } from "react-router-dom"
-import { selectVocabulary } from "../redux/vocabularies/slice"
-import { deleteWordThunk } from "../redux/vocabularies/operations"
+import { Link, useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { Vocabulary } from "../types/Vocabulary"
 import { Container } from "../components/Container"
 import { Header } from "../components/Header"
+import { deleteWord, selectVocabularies } from "../redux/vocabularies/slice"
+import { getVocabulary } from "../helpers/getVocabulary"
 
 export default function OpenVocabulary() {
   const dispatch = useAppDispatch()
-  const vocabulary = useAppSelector(selectVocabulary) as Vocabulary
+  const { id } = useParams()
+  const vocabulary = getVocabulary(
+    useAppSelector(selectVocabularies),
+    id as string
+  )
+
+  if (!id) return
 
   return (
     <Container>
@@ -60,7 +65,9 @@ export default function OpenVocabulary() {
                     </Link>
                     <a
                       className="btn btn-danger"
-                      onClick={() => dispatch(deleteWordThunk(wordsId))}
+                      onClick={() =>
+                        dispatch(deleteWord({ vocabularyId: id, wordId: "sd" }))
+                      }
                     >
                       Delete
                     </a>

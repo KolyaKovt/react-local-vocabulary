@@ -1,15 +1,8 @@
-import { useEffect } from "react"
 import { Link } from "react-router-dom"
-
-import { Loader } from "../components/Loader"
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import {
-  deleteVocabularyThunk,
-  fetchVocabulariesThunk,
-} from "../redux/vocabularies/operations"
-import {
-  selectIsLoading,
+  deleteVocabulary,
   selectVocabularies,
 } from "../redux/vocabularies/slice"
 import { Container } from "../components/Container"
@@ -18,16 +11,9 @@ import { Header } from "../components/Header"
 export default function ListVocabularies() {
   const dispatch = useAppDispatch()
   const vocabularies = useAppSelector(selectVocabularies)
-  const isLoading = useAppSelector(selectIsLoading)
-
-  useEffect(() => {
-    dispatch(fetchVocabulariesThunk())
-  }, [dispatch])
 
   return (
     <>
-      {isLoading && <Loader />}
-
       <Container>
         <Header>
           <p className="mainTitle mb-6">Vocabularies</p>
@@ -64,7 +50,7 @@ export default function ListVocabularies() {
                         <button
                           className="btn btn-danger"
                           onClick={() =>
-                            dispatch(deleteVocabularyThunk(id.toString()))
+                            dispatch(deleteVocabulary(id))
                           }
                         >
                           Delete
