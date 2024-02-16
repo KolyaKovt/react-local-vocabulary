@@ -20,7 +20,7 @@ export const WordForm = ({ submit, register, btnLabel }: Props) => {
         <input
           {...register("word")}
           type="text"
-          placeholder="I like you"
+          placeholder="..."
           className="input input-bordered"
           required
         />
@@ -32,7 +32,7 @@ export const WordForm = ({ submit, register, btnLabel }: Props) => {
         <input
           {...register("translation")}
           type="text"
-          placeholder="Ik vind je leuk"
+          placeholder="..."
           className="input input-bordered"
           required
         />
