@@ -18,7 +18,7 @@ export const VocabularyForm = ({ submit, register, btnLabel }: Props) => {
         <input
           {...register("name")}
           type="text"
-          placeholder="name"
+          placeholder="..."
           className="input input-bordered"
           required
         />
