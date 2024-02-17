@@ -1,7 +1,9 @@
 import { Link, useParams } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
+
 import { Container } from "../components/Container"
 import { Header } from "../components/Header"
+
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { deleteWord, selectVocabularies } from "../redux/vocabularies/slice"
 import { getVocabulary } from "../helpers/getVocabulary"
 

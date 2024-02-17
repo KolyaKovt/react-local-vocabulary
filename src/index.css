@@ -17,7 +17,7 @@
   @apply text-4xl font-bold;
 }
 .itemsList {
-  @apply flex flex-col gap-6 pb-6;
+  @apply flex flex-col gap-6 pb-6 w-[280px];
 }
 .btnContainer {
   @apply flex gap-2 flex-wrap;

@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
 
+import { Container } from "../components/Container"
+import { Header } from "../components/Header"
+
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import {
   deleteVocabulary,
   selectVocabularies,
 } from "../redux/vocabularies/slice"
-import { Container } from "../components/Container"
-import { Header } from "../components/Header"
 
 export default function ListVocabularies() {
   const dispatch = useAppDispatch()
@@ -31,7 +32,7 @@ export default function ListVocabularies() {
 
                 return (
                   <li key={id}>
-                    <div className="btnContainer mb-4 font-bold text-2xl">
+                    <div className="btnContainer mb-4 font-bold text-2xl overflow-x-auto">
                       <p>{name}</p>
                       <p>({exercise})</p>
                     </div>
