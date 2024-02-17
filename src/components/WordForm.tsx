@@ -20,10 +20,11 @@ export const WordForm = ({ submit, register, btnLabel }: Props) => {
           <span className="label-text">Word</span>
         </label>
         <input
-          {...register("word")}
-          type="text"
-          placeholder="..."
           className="input input-bordered"
+          type="text"
+          {...register("word")}
+          placeholder="..."
+          autoComplete="off"
           required
         />
       </div>
@@ -32,10 +33,10 @@ export const WordForm = ({ submit, register, btnLabel }: Props) => {
           <span className="label-text">Translation</span>
         </label>
         <input
-          {...register("translation")}
-          type="text"
-          placeholder="..."
           className="input input-bordered"
+          type="text"
+          {...register("translation")}
+          placeholder="..."
           required
         />
       </div>

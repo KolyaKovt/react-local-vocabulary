@@ -17,10 +17,11 @@ export const VocabularyForm = ({ submit, register, btnLabel }: Props) => {
           <span className="label-text">Name</span>
         </label>
         <input
-          {...register("name")}
-          type="text"
-          placeholder="..."
           className="input input-bordered"
+          type="text"
+          {...register("name")}
+          placeholder="..."
+          autoComplete="off"
           required
         />
       </div>
