@@ -134,12 +134,15 @@ export default function ConnectingWords() {
 
   if (!vocabulary) return <Loader />
 
+  const leftWords = vocabulary.firstLang.length - countOfGuessedWords
+
   return (
     <Container>
       <Header>
         <p className="mainTitle mb-6">
-          Left words: {vocabulary.firstLang.length - countOfGuessedWords}
+          {leftWords !== 0 ? `Left words: ${leftWords}` : "Nice job!"}
         </p>
+        
         <div className="btnContainer">
           <Link className="btn btn-secondary" to={`/${vocabulary.id}`}>
             Cancel

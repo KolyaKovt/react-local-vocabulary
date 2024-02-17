@@ -78,7 +78,6 @@ const GuessingWords = () => {
       setButtonsInds([])
       correctInd = -1
       dispatch(exercise(vocabulary.id))
-      restart()
     }
   }
 
@@ -93,11 +92,13 @@ const GuessingWords = () => {
     restart()
   }, [restart])
 
+  const leftWords = vocabulary.firstLang.length - countOfGuessedWords
+
   return (
     <Container>
       <Header>
         <p className="mainTitle mb-6">
-          Left words: {vocabulary.firstLang.length - countOfGuessedWords}
+          {leftWords !== 0 ? `Left words: ${leftWords}` : "Nice job!"}
         </p>
 
         <div className="btnContainer">
