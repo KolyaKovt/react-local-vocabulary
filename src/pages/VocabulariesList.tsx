@@ -8,10 +8,23 @@ import {
   deleteVocabulary,
   selectVocabularies,
 } from "../redux/vocabularies/slice"
+import { toast } from "react-toastify"
+import ConfirmationToast from "../components/ConfirmationToast"
 
 export default function ListVocabularies() {
   const dispatch = useAppDispatch()
   const vocabularies = useAppSelector(selectVocabularies)
+
+  const confirmDelete = (id: string, name: string) => {
+    toast(
+      <ConfirmationToast
+        message={`Are you sure you want to delete "${name}"?`}
+        onConfirm={() => {
+          dispatch(deleteVocabulary(id))
+        }}
+      />
+    )
+  }
 
   return (
     <>
@@ -50,9 +63,8 @@ export default function ListVocabularies() {
                       <li>
                         <button
                           className="btn btn-danger"
-                          onClick={() =>
-                            dispatch(deleteVocabulary(id))
-                          }
+                          type="button"
+                          onClick={() => confirmDelete(id, name)}
                         >
                           Delete
                         </button>

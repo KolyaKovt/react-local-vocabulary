@@ -6,6 +6,8 @@ import { Header } from "../components/Header"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { deleteWord, selectVocabularies } from "../redux/vocabularies/slice"
 import { getVocabulary } from "../helpers/getVocabulary"
+import { toast } from "react-toastify"
+import ConfirmationToast from "../components/ConfirmationToast"
 
 export default function OpenVocabulary() {
   const dispatch = useAppDispatch()
@@ -14,6 +16,21 @@ export default function OpenVocabulary() {
     useAppSelector(selectVocabularies),
     id as string
   )
+
+  const confirmDelete = (
+    vocabularyId: string,
+    wordId: string,
+    word: string
+  ) => {
+    toast(
+      <ConfirmationToast
+        message={`Are you sure you want to delete "${word}"?`}
+        onConfirm={() => {
+          dispatch(deleteWord({ vocabularyId, wordId }))
+        }}
+      />
+    )
+  }
 
   if (!id) return
 
@@ -54,6 +71,7 @@ export default function OpenVocabulary() {
             {vocabulary.firstLang.map((word, index) => {
               const wordsId = vocabulary.wordsIds[index]
               const translation = vocabulary.secLang[index]
+              const wordId = vocabulary.wordsIds[index]
 
               return (
                 <li className="container-for-word-pairs" key={wordsId}>
@@ -67,9 +85,7 @@ export default function OpenVocabulary() {
                     </Link>
                     <a
                       className="btn btn-danger"
-                      onClick={() =>
-                        dispatch(deleteWord({ vocabularyId: id, wordId: "sd" }))
-                      }
+                      onClick={() => confirmDelete(id, wordId, word)}
                     >
                       Delete
                     </a>
