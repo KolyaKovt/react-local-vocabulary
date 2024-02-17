@@ -7,6 +7,7 @@ import { Container } from "../components/Container"
 import { Header } from "../components/Header"
 import { exercise, selectVocabularies } from "../redux/vocabularies/slice"
 import { getVocabulary } from "../helpers/getVocabulary"
+import { NotEnoughWordsError } from "../components/NotEnoughWordsError"
 
 const countOfStrins = 4
 let indecies: number[] = []
@@ -132,6 +133,9 @@ export default function ConnectingWords() {
     }
   }, [clearButtons, fillCurrentWords, guessedIndFL.length])
 
+  if (vocabulary.firstLang.length < 4)
+    return <NotEnoughWordsError />
+
   if (!vocabulary) return <Loader />
 
   const leftWords = vocabulary.firstLang.length - countOfGuessedWords
@@ -142,7 +146,7 @@ export default function ConnectingWords() {
         <p className="mainTitle mb-6">
           {leftWords !== 0 ? `Left words: ${leftWords}` : "Nice job!"}
         </p>
-        
+
         <div className="btnContainer">
           <Link className="btn btn-secondary" to={`/${vocabulary.id}`}>
             Cancel

@@ -5,6 +5,7 @@ import { Container } from "../components/Container"
 import { Header } from "../components/Header"
 import { getVocabulary } from "../helpers/getVocabulary"
 import { exercise, selectVocabularies } from "../redux/vocabularies/slice"
+import { NotEnoughWordsError } from "../components/NotEnoughWordsError"
 
 const countOfStrins = 6
 let indecies: number[] = []
@@ -93,6 +94,9 @@ const GuessingWords = () => {
   }, [restart])
 
   const leftWords = vocabulary.firstLang.length - countOfGuessedWords
+
+  if (vocabulary.firstLang.length < 4)
+    return <NotEnoughWordsError />
 
   return (
     <Container>
