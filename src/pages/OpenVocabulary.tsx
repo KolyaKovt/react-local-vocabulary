@@ -19,7 +19,7 @@ export default function OpenVocabulary() {
 
   return (
     <Container>
-      <Header>
+      <Header full={true}>
         <p className="mainTitle mb-6">
           {vocabulary.name} (count: {vocabulary.firstLang.length})
         </p>

@@ -96,7 +96,7 @@ const GuessingWords = () => {
 
   return (
     <Container>
-      <Header>
+      <Header full={true}>
         <p className="mainTitle mb-6">
           {leftWords !== 0 ? `Left words: ${leftWords}` : "Nice job!"}
         </p>

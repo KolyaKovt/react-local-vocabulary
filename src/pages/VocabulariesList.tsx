@@ -16,7 +16,7 @@ export default function ListVocabularies() {
   return (
     <>
       <Container>
-        <Header>
+        <Header full={false}>
           <p className="mainTitle mb-6">Vocabularies</p>
           <Link className="btn btn-success" to="/new">
             New vocabulary
