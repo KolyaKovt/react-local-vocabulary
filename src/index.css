@@ -38,5 +38,5 @@
   @apply text-blue-300 border-blue-300;
 }
 .wordsColumn {
-  @apply flex flex-col gap-2
+  @apply flex flex-col gap-2;
 }
