@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit"
-import { Vocabulary } from "../../types/Vocabulary"
+import { Vocabulary } from "../../types"
 import { getVocabulary } from "../../helpers/getVocabulary"
 
 interface State {

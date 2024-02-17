@@ -1,10 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom"
+import { SubmitHandler, useForm } from "react-hook-form"
+
 import { WordForm } from "../components/WordForm"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { Container } from "../components/Container"
+
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { changeWord, selectVocabularies } from "../redux/vocabularies/slice"
 import { getVocabulary } from "../helpers/getVocabulary"
+import { WordFormData } from "../types"
 
 const ChangeWords = () => {
   const navigate = useNavigate()
@@ -16,9 +19,18 @@ const ChangeWords = () => {
     id as string
   )
 
-  const { handleSubmit, register, reset } = useForm()
+  const wordIndex = vocabulary.wordsIds.indexOf(wordId as string)
+  const word = vocabulary.firstLang[wordIndex]
+  const translation = vocabulary.secLang[wordIndex]
 
-  const submit: SubmitHandler<FieldValues> = async data => {
+  const { handleSubmit, register, reset } = useForm<WordFormData>({
+    defaultValues: {
+      word,
+      translation,
+    },
+  })
+
+  const submit: SubmitHandler<WordFormData> = async data => {
     if (id && wordId) {
       dispatch(
         changeWord({

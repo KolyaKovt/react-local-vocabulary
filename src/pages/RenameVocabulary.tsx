@@ -1,26 +1,40 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { VocabularyForm } from "../components/VocabularyForm"
-import { useNavigate, useParams } from "react-router-dom"
-import { useAppDispatch } from "../redux/hooks"
 import { Container } from "../components/Container"
-import { renameVocabulary } from "../redux/vocabularies/slice"
+
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import {
+  renameVocabulary,
+  selectVocabularies,
+} from "../redux/vocabularies/slice"
+import { getVocabulary } from "../helpers/getVocabulary"
+import { VocabularyFormData } from "../types"
 
 export default function RenameVocabulary() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { register, handleSubmit, reset } = useForm()
-  const { id } = useParams()
 
-  const submit: SubmitHandler<FieldValues> = async data => {
-    if (id) {
-      dispatch(
-        renameVocabulary({
-          name: data.name.trim(),
-          id,
-        })
-      )
-    }
+  const { id } = useParams()
+  const vocabulary = getVocabulary(
+    useAppSelector(selectVocabularies),
+    id as string
+  )
+
+  const { register, handleSubmit, reset } = useForm<VocabularyFormData>({
+    defaultValues: {
+      name: vocabulary.name,
+    },
+  })
+
+  const submit: SubmitHandler<VocabularyFormData> = async data => {
+    dispatch(
+      renameVocabulary({
+        name: data.name.trim(),
+        id: vocabulary.id,
+      })
+    )
 
     navigate("/")
     reset()
@@ -30,9 +44,7 @@ export default function RenameVocabulary() {
     <Container>
       <main>
         <section>
-          <h1 className="mainTitle mt-6 mb-6">
-            Rename the vocabulary
-          </h1>
+          <h1 className="mainTitle mt-6 mb-6">Rename the vocabulary</h1>
           <VocabularyForm
             submit={handleSubmit(submit)}
             register={register}

@@ -1,10 +1,12 @@
 import { FormEventHandler } from "react"
-import { FieldValues, UseFormRegister } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form"
 import { Link, useParams } from "react-router-dom"
+
+import { WordFormData } from "../types"
 
 interface Props {
   submit: FormEventHandler<HTMLFormElement>
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<WordFormData>
   btnLabel: string
 }
 

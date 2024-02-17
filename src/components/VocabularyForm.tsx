@@ -1,10 +1,11 @@
 import { FormEventHandler } from "react"
-import { FieldValues, UseFormRegister } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form"
 import { Link } from "react-router-dom"
+import { VocabularyFormData } from "../types"
 
 interface Props {
   submit: FormEventHandler<HTMLFormElement>
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<VocabularyFormData>
   btnLabel: string
 }
 

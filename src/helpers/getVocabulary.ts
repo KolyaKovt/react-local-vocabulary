@@ -1,4 +1,4 @@
-import { Vocabulary } from "../types/Vocabulary"
+import { Vocabulary } from "../types"
 
 export const getVocabulary = (
   vocabularies: Vocabulary[],
