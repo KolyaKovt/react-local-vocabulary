@@ -27,7 +27,7 @@ export default function AddWords() {
     <Container>
       <main>
         <h1 className="mainTitle mt-6 mb-6">
-          Adding words in: {vocabulary.name}
+          Adding words to: {vocabulary.name}
         </h1>
         <WordForm
           submit={handleSubmit(submit)}
