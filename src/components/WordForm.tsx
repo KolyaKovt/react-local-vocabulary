@@ -37,6 +37,7 @@ export const WordForm = ({ submit, register, btnLabel }: Props) => {
           type="text"
           {...register("translation")}
           placeholder="..."
+          autoComplete="off"
           required
         />
       </div>
