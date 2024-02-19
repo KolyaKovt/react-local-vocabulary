@@ -10,7 +10,7 @@ export const Header = ({ children, full }: Props) => {
     <header
       className={`sticky ${
         full ? "min-w-[100%]" : "min-w-[280px]"
-      } py-6 top-0 bg-[#1d232a]`}
+      } py-6 top-0 bg-base-100`}
     >
       {children}
     </header>
