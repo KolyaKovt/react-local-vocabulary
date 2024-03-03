@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import { ToastContainer } from "react-toastify"
 
-import App from "./components/App.tsx"
+import App from "./App.tsx"
 
 import { persistor, store } from "./redux/index.ts"
 import "modern-normalize/modern-normalize.css"
